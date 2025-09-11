@@ -1,4 +1,4 @@
-async function sendMessage(model, prompt) {
+export async function sendMessage(model, prompt) {
   const url = "http://localhost:11434/api/generate";
 
   try {
@@ -20,10 +20,22 @@ async function sendMessage(model, prompt) {
 
     const result = await response.json();
     console.log(result);
+    return result;
   } catch (error) {
     console.error("Error:", error.message);
     console.log("FALLO BRO");
   }
 }
 
-sendMessage("gemma3:1b", "Saluda a Luis");
+export function addMessageToDOM(content, sentBy, parent) {
+  const newMessageContent = document.createElement("div");
+  const newMessage = document.createElement("p");
+  newMessage.textContent = content;
+  newMessageContent.appendChild(newMessage);
+  if(sentBy === "user"){
+    newMessage.className = "user-message"
+  }else{
+      newMessage.className = "ai-message"    
+  }
+  parent.appendChild(newMessageContent)
+}

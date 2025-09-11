@@ -188,3 +188,15 @@ body {
     font-size: 15px;
   }
 }
+
+.user-message{
+  width: auto;
+  height: auto;
+  background-color:aqua ;
+}
+
+.ai-message{
+  width: auto;
+  height: auto;
+  background-color:rgb(150, 150, 26);
+}
