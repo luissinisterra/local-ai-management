@@ -5,11 +5,22 @@ const textarea = document.getElementById("user-input");
 const sendButton = document.getElementById("user-button");
 const chatMessages = document.getElementById("chat-messages")
 
-sendButton.addEventListener("click", async () => {
-    const inputValue = textarea.value;
-    textarea.value = ""
-    addMessageToDOM(inputValue,"user",chatMessages)
-    const result = await sendMessage("gemma3:1b", inputValue)
-    addMessageToDOM(result.response,"ai",chatMessages)
-});
+async function handleSendMessage() {
+  const inputValue = textarea.value.trim();
+  if (!inputValue) return;
 
+  textarea.value = "";
+  addMessageToDOM(inputValue, "user", chatMessages);
+
+  const result = await sendMessage("gemma3:1b", inputValue);
+  addMessageToDOM(result.response, "ai", chatMessages);
+}
+
+sendButton.addEventListener("click", handleSendMessage);
+
+textarea.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    handleSendMessage();
+  }
+});

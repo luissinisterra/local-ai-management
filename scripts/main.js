@@ -23,19 +23,21 @@ export async function sendMessage(model, prompt) {
     return result;
   } catch (error) {
     console.error("Error:", error.message);
-    console.log("FALLO BRO");
   }
 }
 
 export function addMessageToDOM(content, sentBy, parent) {
   const newMessageContent = document.createElement("div");
   const newMessage = document.createElement("p");
+
   newMessage.textContent = content;
   newMessageContent.appendChild(newMessage);
+
   if(sentBy === "user"){
-    newMessage.className = "user-message"
+    newMessage.className = "user-message";
   }else{
-      newMessage.className = "ai-message"    
+    newMessage.className = "ai-message";   
   }
+
   parent.appendChild(newMessageContent)
 }
