@@ -1,4 +1,4 @@
-/* Reset y definición de modo oscuro */
+/* Reset y definición de modo oscuro SUAVE */
 * {
   margin: 0;
   padding: 0;
@@ -6,12 +6,12 @@
 }
 
 :root {
-  /* Tus colores para modo oscuro */
-  --color-bg: #37353E;       /* Fondo principal */
-  --color-muted: #44444E;    /* Bordes, placeholder, scroll */
-  --color-ai: #715A5A;       /* Fondo de mensajes IA */
-  --color-user: #37353E;     /* Fondo de mensajes usuario (mismo que bg, pero con texto claro) */
-  --color-text: #D3DAD9;     /* Texto principal y mensajes de usuario */
+  --color-bg: #2A2B30;        /* Fondo principal — gris oscuro suave */
+  --color-muted: #5A5B63;     /* Scroll, placeholder, bordes — gris medio */
+  --color-ai: #3C3E47;        /* Fondo de IA — gris azulado calmado */
+  --color-user: #444654;      /* Fondo de usuario — gris ligeramente más oscuro que el de IA */
+  --color-text: #E0E0E2;      /* Texto — blanco suave, sin brillo */
+  --color-button: #4E5166;    /* Botón de enviar — gris azulado/violeta tenue */
 }
 
 body {
@@ -60,14 +60,13 @@ body {
   line-height: 1.5;
   word-wrap: break-word;
   font-weight: 400;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Sutil para profundidad en modo oscuro */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Sutil para profundidad */
 }
 
 .message.user .bubble {
   background: var(--color-user);
   color: var(--color-text);
   border-bottom-right-radius: 6px;
-  border: 1px solid var(--color-muted); /* Sutil borde para definir sobre fondo oscuro */
 }
 
 .message.ai .bubble {
@@ -110,8 +109,8 @@ body {
 }
 
 #user-input:focus {
-  border-color: var(--color-ai);
-  box-shadow: 0 1px 6px rgba(113, 90, 90, 0.3);
+  border-color: var(--color-button);
+  box-shadow: 0 1px 6px rgba(78, 81, 102, 0.3);
 }
 
 /* Botón de enviar — con Font Awesome, minimalista, integrado */
@@ -119,7 +118,7 @@ body {
   position: absolute;
   right: 10px;
   bottom: 10px;
-  background: var(--color-ai);
+  background: var(--color-button);
   color: var(--color-text);
   border: none;
   border-radius: 8px;
@@ -135,7 +134,7 @@ body {
 }
 
 #user-button:hover {
-  background: #5d4a4a; /* Oscurecer un poco el tono tierra */
+  background: #45485a; /* Un poquito más oscuro */
 }
 
 #user-button:active {
@@ -157,7 +156,7 @@ body {
 }
 
 #chat-messages::-webkit-scrollbar-thumb:hover {
-  background: var(--color-ai);
+  background: var(--color-button);
 }
 
 /* Responsive */
