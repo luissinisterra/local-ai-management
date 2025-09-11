@@ -1,20 +1,34 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title></title>
+    <title>Chat con IA</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="chat-container">
-      <div id="chat"></div>
-      <div>
-        <textarea id="user-input" rows="" cols=""></textarea>
-        <button id="user-button" type=""></button>
+    <div id="chat-messages">
+      <!-- Mensajes dinámicos aquí -->
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrapper">
+        <textarea
+          id="user-input"
+          placeholder="Escribe un mensaje..."
+          rows="1"
+        ></textarea>
+        <button id="user-button" type="button" aria-label="Enviar">
+          <i class="fa-regular fa-paper-plane"></i>
+        </button>
       </div>
     </div>
 
     <script src="script.js"></script>
   </body>
 </html>
+

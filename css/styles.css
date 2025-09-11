@@ -1,0 +1,191 @@
+/* Reset y definición de modo oscuro */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Tus colores para modo oscuro */
+  --color-bg: #37353E;       /* Fondo principal */
+  --color-muted: #44444E;    /* Bordes, placeholder, scroll */
+  --color-ai: #715A5A;       /* Fondo de mensajes IA */
+  --color-user: #37353E;     /* Fondo de mensajes usuario (mismo que bg, pero con texto claro) */
+  --color-text: #D3DAD9;     /* Texto principal y mensajes de usuario */
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Área de mensajes — centrada, con aire arriba */
+#chat-messages {
+  flex: 1;
+  padding: 64px 24px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Estilo de mensajes */
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.message.user {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+.bubble {
+  max-width: 75%;
+  padding: 14px 18px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  font-weight: 400;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Sutil para profundidad en modo oscuro */
+}
+
+.message.user .bubble {
+  background: var(--color-user);
+  color: var(--color-text);
+  border-bottom-right-radius: 6px;
+  border: 1px solid var(--color-muted); /* Sutil borde para definir sobre fondo oscuro */
+}
+
+.message.ai .bubble {
+  background: var(--color-ai);
+  color: var(--color-text);
+  border-bottom-left-radius: 6px;
+}
+
+/* Área de entrada — pegada abajo, centrada */
+.input-area {
+  padding: 16px 24px 32px;
+  background: var(--color-bg);
+}
+
+.input-wrapper {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+#user-input {
+  width: 100%;
+  padding: 16px 56px 16px 20px; /* Espacio para el botón */
+  border: 1px solid var(--color-muted);
+  border-radius: 18px;
+  font-size: 15px;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  max-height: 120px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#user-input::placeholder {
+  color: var(--color-muted);
+  opacity: 1;
+}
+
+#user-input:focus {
+  border-color: var(--color-ai);
+  box-shadow: 0 1px 6px rgba(113, 90, 90, 0.3);
+}
+
+/* Botón de enviar — con Font Awesome, minimalista, integrado */
+#user-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: var(--color-ai);
+  color: var(--color-text);
+  border: none;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  padding: 0;
+  font-size: 16px;
+}
+
+#user-button:hover {
+  background: #5d4a4a; /* Oscurecer un poco el tono tierra */
+}
+
+#user-button:active {
+  transform: scale(0.96);
+}
+
+/* Scroll discreto */
+#chat-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+#chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+  background: var(--color-muted);
+  border-radius: 5px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ai);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #chat-messages {
+    padding: 48px 16px 16px;
+  }
+
+  .bubble {
+    max-width: 85%;
+    padding: 14px 16px;
+    font-size: 14.5px;
+  }
+
+  .input-area {
+    padding: 12px 16px 24px;
+  }
+
+  #user-input {
+    padding: 14px 52px 14px 16px;
+    font-size: 14.5px;
+  }
+
+  #user-button {
+    width: 34px;
+    height: 34px;
+    right: 8px;
+    bottom: 8px;
+    font-size: 15px;
+  }
+}

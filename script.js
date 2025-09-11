@@ -26,4 +26,4 @@ async function sendMessage(model, prompt) {
   }
 }
 
-sendMessage("gemma3:4b", "Saluda a Luis");
+sendMessage("gemma3:1b", "Saluda a Luis");
