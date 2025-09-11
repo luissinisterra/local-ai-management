@@ -153,7 +153,7 @@ body {
 #chat-messages::-webkit-scrollbar-thumb {
   background: var(--color-muted);
   border-radius: 5px;
-}
+} 
 
 #chat-messages::-webkit-scrollbar-thumb:hover {
   background: var(--color-button);
