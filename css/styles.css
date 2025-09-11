@@ -189,14 +189,23 @@ body {
   }
 }
 
-.user-message{
-  width: auto;
-  height: auto;
-  background-color:aqua ;
+.user-message {
+  margin-left: auto;                /* Lo empuja hasta el borde derecho */
+  max-width: 70%;
+  padding: 10px 15px;
+  background-color: var(--color-user);
+  color: var(--color-text);
+  border-radius: 15px 15px 0 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.ai-message{
-  width: auto;
-  height: auto;
-  background-color:rgb(150, 150, 26);
+.ai-message {
+  margin-right: auto;               /* Lo pega al borde izquierdo */
+  max-width: 70%;
+  padding: 10px 15px;
+  background-color: var(--color-ai);
+  color: var(--color-text);
+  border-radius: 15px 15px 15px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
+
