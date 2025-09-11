@@ -6,12 +6,12 @@
 }
 
 :root {
-  --color-bg: #2A2B30;        /* Fondo principal — gris oscuro suave */
-  --color-muted: #5A5B63;     /* Scroll, placeholder, bordes — gris medio */
-  --color-ai: #3C3E47;        /* Fondo de IA — gris azulado calmado */
-  --color-user: #444654;      /* Fondo de usuario — gris ligeramente más oscuro que el de IA */
-  --color-text: #E0E0E2;      /* Texto — blanco suave, sin brillo */
-  --color-button: #4E5166;    /* Botón de enviar — gris azulado/violeta tenue */
+  --color-bg: #E4E5EB;        /* Fondo principal — gris azulado muy claro */
+  --color-muted: #C0C2CC;     /* Scroll, placeholder, bordes — gris medio claro */
+  --color-ai: #D2D4DD;        /* Fondo de IA — gris azulado pastel */
+  --color-user: #BCC0D1;      /* Fondo de usuario — tono suave, algo más definido */
+  --color-text: #2E2F34;      /* Texto — gris oscuro para buen contraste */
+  --color-button: #A4A7BA;    /* Botón de enviar — gris violeta claro, elegante */
 }
 
 body {
