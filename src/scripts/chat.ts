@@ -1,5 +1,4 @@
-import { sendMessage } from "./main";
-import { addMessageToDOM } from "./main";
+import { sendMessage, addMessageToDOM } from "./main.js";
 
 const textarea = document.getElementById("user-input") as HTMLTextAreaElement;
 const sendButton = document.getElementById("user-button") as HTMLElement;
