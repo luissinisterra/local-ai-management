@@ -1,12 +1,12 @@
-import { sendMessage } from "./main.js"
+import { sendMessage } from "./main.js";
 import { addMessageToDOM } from "./main.js";
 
-const textarea = document.getElementById("user-input");
-const sendButton = document.getElementById("user-button");
-const chatMessages = document.getElementById("chat-messages")
+const textarea = document.getElementById("user-input") as HTMLTextAreaElement;
+const sendButton = document.getElementById("user-button") as HTMLElement;
+const chatMessages = document.getElementById("chat-messages") as HTMLElement;
 
 async function handleSendMessage() {
-  const inputValue = textarea.value.trim();
+  const inputValue: string = textarea.value.trim();
   if (!inputValue) return;
 
   textarea.value = "";
