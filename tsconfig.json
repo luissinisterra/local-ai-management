@@ -1,39 +1,28 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // Fiut
+    // Archivos de entrada/salida
     "rootDir": "./src",
     "outDir": "./dist",
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "ES6",
-    "target": "ES6",
-    "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
+    // Target moderno con soporte para async generators
+    "target": "ES2018", // ✅ Requerido para async generators
+    "module": "ESNext", // ✅ Para módulos modernos (usa "commonjs" si es para Node.js antiguo)
+    "lib": ["ES2018", "DOM"], // ✅ Incluye Symbol.asyncIterator y APIs del navegador
 
-    // Other Outputs
+    // Tipos (vacío o personalizado)
+    "types": [],
+
+    // Opciones de salida
     "sourceMap": false,
     "declaration": false,
     "declarationMap": false,
 
-    // Stricter Typechecking Options
+    // Reglas de tipado estricto
+    "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
 
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
-    "strict": true,
+    // Estilo y organización del código
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
