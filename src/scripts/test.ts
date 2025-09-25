@@ -3,7 +3,7 @@ interface Message {
   content: string;
 }
 
-export async function* chat(model: string, history: Message[]) {
+export async function* chat(model: string, history: Message[]): any {
   const url = "http://localhost:11434/api/chat";
 
   try {

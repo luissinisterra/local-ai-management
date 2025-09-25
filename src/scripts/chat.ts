@@ -1,18 +1,35 @@
-import { sendMessage, addMessageToDOM } from "./main.js";
+import { chat, addMessageToDOM } from "./main.js";
+import type { Message } from "../interfaces/Message.js";
 
 const textarea = document.getElementById("user-input") as HTMLTextAreaElement;
 const sendButton = document.getElementById("user-button") as HTMLElement;
 const chatMessages = document.getElementById("chat-messages") as HTMLElement;
 
+const history: Message[] = [];
+
 async function handleSendMessage() {
+  console.log("boton pre");
   const inputValue: string = textarea.value.trim();
   if (!inputValue) return;
 
   textarea.value = "";
   addMessageToDOM(inputValue, "user", chatMessages);
 
-  const result = await sendMessage("gemma3:1b", inputValue);
-  addMessageToDOM(result.response, "ai", chatMessages);
+  history.push({
+    role: "user",
+    content: inputValue,
+  });
+
+  let currentAiMessage = addMessageToDOM("", "ai", chatMessages);
+
+  for await (const chunk of chat("gemma3:4b", history)) {
+    currentAiMessage.textContent += chunk;
+  }
+
+  history.push({
+    role: "ai",
+    content: currentAiMessage + "",
+  });
 }
 
 sendButton.addEventListener("click", handleSendMessage);
