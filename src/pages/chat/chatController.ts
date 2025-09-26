@@ -1,4 +1,4 @@
-import { chat, addMessageToDOM } from "./main.js";
+import { chat } from "../../../dist/services/ollamaService.js";
 import type { Message } from "../interfaces/Message.js";
 
 const textarea = document.getElementById("user-input") as HTMLTextAreaElement;
@@ -8,7 +8,6 @@ const chatMessages = document.getElementById("chat-messages") as HTMLElement;
 const history: Message[] = [];
 
 async function handleSendMessage() {
-  console.log("boton pre");
   const inputValue: string = textarea.value.trim();
   if (!inputValue) return;
 
@@ -40,3 +39,22 @@ textarea.addEventListener("keydown", (event) => {
     handleSendMessage();
   }
 });
+
+function addMessageToDOM(
+  content: string,
+  sentBy: string,
+  parent: HTMLElement,
+): HTMLElement {
+  const newMessageContainer = document.createElement("div");
+  const newMessage = document.createElement("p");
+  newMessage.textContent = content;
+  newMessageContainer.appendChild(newMessage);
+
+  if (sentBy === "user") {
+    newMessage.className = "user-message";
+  } else {
+    newMessage.className = "ai-message";
+  }
+  parent.appendChild(newMessageContainer);
+  return newMessage;
+}
