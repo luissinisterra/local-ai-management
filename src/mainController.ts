@@ -4,6 +4,15 @@ const pageContainer = document.getElementById(
   "page-container",
 ) as HTMLElement | null;
 
+const toggleButtons =
+  document.querySelectorAll<HTMLButtonElement>(".toggle-btn");
+
+toggleButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    toggleSidebar();
+  });
+});
+
 function toggleSidebar(): void {
   const sidebar = document.getElementById("sidebar") as HTMLElement | null;
   const overlay = document.getElementById(

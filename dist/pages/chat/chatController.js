@@ -16,8 +16,11 @@ export default function init(shadow) {
             role: "user",
             content: inputValue,
         });
-        let currentAiMessage = addMessageToDOM("", "ai", chatMessages);
+        let currentAiMessage = null;
         for await (const chunk of chat("gemma3:4b", history)) {
+            if (!currentAiMessage) {
+                currentAiMessage = addMessageToDOM("", "ai", chatMessages);
+            }
             currentAiMessage.textContent += chunk;
         }
         history.push({
