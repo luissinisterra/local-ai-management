@@ -1,4 +1,4 @@
-import type { Message } from "";
+import type { Message } from "models/interfaces/Message";
 
 export async function sendMessage(model: string, prompt: string) {
   const url = "http://localhost:11434/api/generate";
@@ -32,7 +32,6 @@ export async function* chat(
   model: string,
   history: Message[],
 ): AsyncGenerator<string> {
-  console.log("AHHHHH1");
   const url = "http://localhost:11434/api/chat";
 
   try {

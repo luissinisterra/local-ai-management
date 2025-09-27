@@ -40,7 +40,7 @@
         </div>
 
         <div class="nav-section">
-          <a href="./src/pages/chat/chatTemplate.html" class="nav-item">
+          <a href="#" class="nav-item">
             <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
               <path
                 d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
@@ -87,7 +87,9 @@
       </div>
     </aside>
 
-    <main id="page" class="main-content"></main>
+    <main id="page-container" class="main-content">
+      <chat-page></chat-page>
+    </main>
 
     <script>
       function toggleSidebar() {
@@ -156,19 +158,19 @@
       // Navigation functionality
       document.querySelectorAll(".nav-item").forEach((item) => {
         item.addEventListener("click", (e) => {
-          //e.preventDefault();
+          e.preventDefault();
           document
             .querySelectorAll(".nav-item")
             .forEach((t) => t.classList.remove("active"));
           item.classList.add("active");
 
           // Close sidebar on mobile after navigation
-          if (window.innerWidth <= 768) {
+          /*if (window.innerWidth <= 768) {
             const sidebar = document.getElementById("sidebar");
             const overlay = document.getElementById("sidebarOverlay");
             sidebar.classList.remove("open");
             overlay.classList.remove("active");
-          }
+          }*/
         });
       });
 
@@ -182,6 +184,6 @@
         });
       });
     </script>
+    <script type="module" src="./dist/pages/chat/chatComponent.js"></script>
   </body>
 </html>
-

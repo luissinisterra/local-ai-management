@@ -25,7 +25,6 @@ export async function sendMessage(model, prompt) {
 }
 export async function* chat(model, history) {
     var _a, _b;
-    console.log("AHHHHH1");
     const url = "http://localhost:11434/api/chat";
     try {
         const res = await fetch(url, {
@@ -52,7 +51,6 @@ export async function* chat(model, history) {
             // Separar por líneas (cada línea es un JSON)
             const lines = buffer === null || buffer === void 0 ? void 0 : buffer.split("\n");
             buffer = lines.pop(); // Guarda la última línea incompleta
-            console.log("AHHHHH2");
             for (const line of lines) {
                 if (!line.trim())
                     continue;
@@ -73,18 +71,4 @@ export async function* chat(model, history) {
     catch (error) {
         console.error("Error en chat():", error.message);
     }
-}
-export function addMessageToDOM(content, sentBy, parent) {
-    const newMessageContainer = document.createElement("div");
-    const newMessage = document.createElement("p");
-    newMessage.textContent = content;
-    newMessageContainer.appendChild(newMessage);
-    if (sentBy === "user") {
-        newMessage.className = "user-message";
-    }
-    else {
-        newMessage.className = "ai-message";
-    }
-    parent.appendChild(newMessageContainer);
-    return newMessage;
 }

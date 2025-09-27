@@ -6,16 +6,17 @@
 }
 
 :root {
-  --color-bg: #E4E5EB;        /* Fondo principal — gris azulado muy claro */
-  --color-muted: #C0C2CC;     /* Scroll, placeholder, bordes — gris medio claro */
-  --color-ai: #D2D4DD;        /* Fondo de IA — gris azulado pastel */
-  --color-user: #BCC0D1;      /* Fondo de usuario — tono suave, algo más definido */
-  --color-text: #2E2F34;      /* Texto — gris oscuro para buen contraste */
-  --color-button: #A4A7BA;    /* Botón de enviar — gris violeta claro, elegante */
+  --color-bg: yellow; /* Fondo principal — oscuro, estilo "modo noche" */
+  --color-muted: #555759; /* Scroll, placeholder, bordes — gris medio oscuro */
+  --color-ai: #0a84ff; /* Fondo de IA — azul brillante tecnológico */
+  --color-user: #1e1e1e; /* Fondo de usuario — gris muy oscuro */
+  --color-text: #000; /* Texto — gris claro para buen contraste en oscuro */
+  --color-button: #0a84ff; /* Botón de enviar — mismo azul que IA, destacado */
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+main {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
   display: flex;
@@ -60,7 +61,7 @@ body {
   line-height: 1.5;
   word-wrap: break-word;
   font-weight: 400;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Sutil para profundidad */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sutil para profundidad */
 }
 
 .message.user .bubble {
@@ -99,8 +100,10 @@ body {
   max-height: 120px;
   background: var(--color-bg);
   color: var(--color-text);
-  transition: border-color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 #user-input::placeholder {
@@ -128,7 +131,9 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  transition:
+    background 0.2s,
+    transform 0.1s;
   padding: 0;
   font-size: 16px;
 }
@@ -153,7 +158,7 @@ body {
 #chat-messages::-webkit-scrollbar-thumb {
   background: var(--color-muted);
   border-radius: 5px;
-} 
+}
 
 #chat-messages::-webkit-scrollbar-thumb:hover {
   background: var(--color-button);
@@ -190,22 +195,21 @@ body {
 }
 
 .user-message {
-  margin-left: auto;                /* Lo empuja hasta el borde derecho */
+  margin-left: auto; /* Lo empuja hasta el borde derecho */
   max-width: 70%;
   padding: 10px 15px;
   background-color: var(--color-user);
   color: var(--color-text);
   border-radius: 15px 15px 0 15px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .ai-message {
-  margin-right: auto;               /* Lo pega al borde izquierdo */
+  margin-right: auto; /* Lo pega al borde izquierdo */
   max-width: 70%;
   padding: 10px 15px;
   background-color: var(--color-ai);
   color: var(--color-text);
   border-radius: 15px 15px 15px 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-
