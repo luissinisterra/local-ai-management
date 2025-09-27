@@ -4,10 +4,18 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   color: #f8fafc;
   overflow-x: hidden;
+  height: 100vh;
+  background-color: wheat;
 }
 
 /* Sidebar */
@@ -188,7 +196,7 @@ body {
 /* Main Content */
 .main-content {
   margin-left: 15rem;
-  min-height: 100vh;
+  height: 100%;
   /* Se unifica la transición con el sidebar para un movimiento suave */
   transition: margin-left 0.3s ease-in-out;
 }

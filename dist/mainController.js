@@ -1,6 +1,12 @@
 var _a;
 import loadPage from "./services/routerService.js";
 const pageContainer = document.getElementById("page-container");
+const toggleButtons = document.querySelectorAll(".toggle-btn");
+toggleButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        toggleSidebar();
+    });
+});
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
     const overlay = document.getElementById("sidebarOverlay");
