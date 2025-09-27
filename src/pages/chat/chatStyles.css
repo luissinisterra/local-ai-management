@@ -5,12 +5,12 @@
   box-sizing: border-box;
 }
 
-:root {
-  --color-bg: yellow; /* Fondo principal — oscuro, estilo "modo noche" */
+* {
+  --color-bg: #121212; /* Fondo principal — oscuro, estilo "modo noche" */
   --color-muted: #555759; /* Scroll, placeholder, bordes — gris medio oscuro */
   --color-ai: #0a84ff; /* Fondo de IA — azul brillante tecnológico */
   --color-user: #1e1e1e; /* Fondo de usuario — gris muy oscuro */
-  --color-text: #000; /* Texto — gris claro para buen contraste en oscuro */
+  --color-text: #e0e0e0; /* Texto — gris claro para buen contraste en oscuro */
   --color-button: #0a84ff; /* Botón de enviar — mismo azul que IA, destacado */
 }
 
