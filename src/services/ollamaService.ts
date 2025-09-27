@@ -1,4 +1,4 @@
-import type { Message } from "../interfaces/Message";
+import type { Message } from "models/interfaces/Message";
 
 export async function sendMessage(model: string, prompt: string) {
   const url = "http://localhost:11434/api/generate";
@@ -32,7 +32,6 @@ export async function* chat(
   model: string,
   history: Message[],
 ): AsyncGenerator<string> {
-  console.log("AHHHHH1");
   const url = "http://localhost:11434/api/chat";
 
   try {
@@ -62,7 +61,7 @@ export async function* chat(
       // Separar por líneas (cada línea es un JSON)
       const lines: any = buffer?.split("\n");
       buffer = lines.pop(); // Guarda la última línea incompleta
-      console.log("AHHHHH2");
+
       for (const line of lines) {
         if (!line.trim()) continue;
 
@@ -82,23 +81,4 @@ export async function* chat(
   } catch (error: any) {
     console.error("Error en chat():", error.message);
   }
-}
-
-export function addMessageToDOM(
-  content: string,
-  sentBy: string,
-  parent: HTMLElement,
-): HTMLElement {
-  const newMessageContainer = document.createElement("div");
-  const newMessage = document.createElement("p");
-  newMessage.textContent = content;
-  newMessageContainer.appendChild(newMessage);
-
-  if (sentBy === "user") {
-    newMessage.className = "user-message";
-  } else {
-    newMessage.className = "ai-message";
-  }
-  parent.appendChild(newMessageContainer);
-  return newMessage;
 }
