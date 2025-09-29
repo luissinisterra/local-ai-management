@@ -1,0 +1,31 @@
+<main>
+  <div class="models-header">
+    <h1>Modelos de IA</h1>
+    <p>Gestiona los modelos de IA instalados en tu sistema</p>
+  </div>
+
+  <div class="models-actions">
+    <div class="install-section">
+      <h2>Instalar Nuevo Modelo</h2>
+      <div class="input-group">
+        <input 
+          type="text" 
+          id="model-name" 
+          placeholder="Nombre del modelo (ej: llama2, gemma2:2b)"
+          class="model-input"
+        />
+        <button id="install-model" class="btn btn-primary">Instalar</button>
+      </div>
+    </div>
+
+    <div class="models-section">
+      <div class="section-header">
+        <h2>Modelos Instalados</h2>
+        <button id="refresh-models" class="btn btn-secondary">Actualizar</button>
+      </div>
+      <div id="models-list" class="models-list">
+        <p>Cargando modelos...</p>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,33 +1,16 @@
 {
   "compilerOptions": {
-    // Archivos de entrada/salida
-    "rootDir": "./src",
+    "target": "ES2018",
+    "module": "ESNext",
+    "lib": ["ES2018", "DOM"],
     "outDir": "./dist",
-
-    // Target moderno con soporte para async generators
-    "target": "ES2018", // ✅ Requerido para async generators
-    "module": "ESNext", // ✅ Para módulos modernos (usa "commonjs" si es para Node.js antiguo)
-    "lib": ["ES2018", "DOM"], // ✅ Incluye Symbol.asyncIterator y APIs del navegador
-
-    // Tipos (vacío o personalizado)
-    "types": [],
-
-    // Opciones de salida
-    "sourceMap": false,
-    "declaration": false,
-    "declarationMap": false,
-
-    // Reglas de tipado estricto
+    "rootDir": "./src",
     "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-
-    // Estilo y organización del código
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true
-  }
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
