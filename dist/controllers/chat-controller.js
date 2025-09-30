@@ -7,31 +7,31 @@ export default function init(shadow) {
     const chatMessages = shadow.getElementById("chat-messages");
     // Crear servicio de chat y sesión
     const chatService = new ChatService();
-    chatService.createSession("gemma3:270m");
+    chatService.createSession("gemma3:4b");
     async function handleSendMessage() {
         const inputValue = textarea.value.trim();
         if (!inputValue)
             return;
-        console.log('Enviando mensaje:', inputValue);
+        console.log("Enviando mensaje:", inputValue);
         textarea.value = "";
         addMessageToDOM(inputValue, "user", chatMessages);
         let currentAiMessage = null;
         try {
-            console.log('Iniciando streaming...');
+            console.log("Iniciando streaming...");
             // Enviar mensaje con streaming
             for await (const chunk of chatService.streamMessage(inputValue)) {
-                console.log('Recibido chunk:', chunk);
+                console.log("Recibido chunk:", chunk);
                 if (!currentAiMessage) {
                     currentAiMessage = addMessageToDOM("", "ai", chatMessages);
                 }
                 currentAiMessage.textContent += chunk;
             }
-            console.log('Streaming completado');
+            console.log("Streaming completado");
         }
         catch (error) {
-            console.error('Error sending message:', error);
+            console.error("Error sending message:", error);
             if (!currentAiMessage) {
-                const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+                const errorMessage = error instanceof Error ? error.message : "Error desconocido";
                 currentAiMessage = addMessageToDOM("Error al enviar mensaje: " + errorMessage, "ai", chatMessages);
             }
         }
