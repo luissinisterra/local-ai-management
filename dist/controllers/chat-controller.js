@@ -7,7 +7,7 @@ export default function init(shadow) {
     const chatMessages = shadow.getElementById("chat-messages");
     // Crear servicio de chat y sesión
     const chatService = new ChatService();
-    chatService.createSession("gemma2:2b");
+    chatService.createSession("gemma3:270m");
     async function handleSendMessage() {
         const inputValue = textarea.value.trim();
         if (!inputValue)

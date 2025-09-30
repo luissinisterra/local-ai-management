@@ -10,26 +10,6 @@ export class ChatSession {
     this.model = model;
   }
 
-  // Enviar mensaje y obtener respuesta
-  async sendMessage(userMessage: string): Promise<string> {
-    // Agregar mensaje del usuario
-    this.messages.push({
-      role: 'user',
-      content: userMessage
-    });
-
-    // Obtener respuesta del modelo
-    const response = await this.model.sendMessage(userMessage);
-    
-    // Agregar respuesta de la IA
-    this.messages.push({
-      role: 'assistant',
-      content: response
-    });
-
-    return response;
-  }
-
   // Enviar mensaje con streaming
   async* streamMessage(userMessage: string): AsyncGenerator<string> {
     // Agregar mensaje del usuario
@@ -40,8 +20,8 @@ export class ChatSession {
 
     let aiResponse = '';
     
-    // Stream de respuesta del modelo
-    for await (const chunk of this.model.streamMessage(userMessage)) {
+    // Stream de respuesta del modelo (solo pasamos messages)
+    for await (const chunk of this.model.streamMessage(this.messages)) {
       aiResponse += chunk;
       yield chunk;
     }

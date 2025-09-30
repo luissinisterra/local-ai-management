@@ -1,3 +1,5 @@
+import type { Message } from './interfaces/message.js';
+
 // Modelo simple para representar un modelo de IA
 export class Model {
   name: string;
@@ -8,33 +10,20 @@ export class Model {
     this.size = size;
   }
 
-  // Enviar mensaje al modelo
-  async sendMessage(prompt: string): Promise<string> {
-    const response = await fetch('http://localhost:11434/api/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: this.name,
-        prompt: prompt,
-        stream: false,
-      }),
-    });
-
-    const result = await response.json();
-    return result.response || '';
-  }
-
   // Enviar mensaje con streaming
-  async* streamMessage(prompt: string): AsyncGenerator<string> {
-    console.log('Modelo enviando mensaje a Ollama:', this.name, prompt);
-    
+  async* streamMessage(messages: Message[]): AsyncGenerator<string> {
+    console.log('Modelo enviando mensaje a Ollama:', this.name);
+    const url = "http://localhost:11434/api/chat";
+
     try {
-      const response = await fetch('http://localhost:11434/api/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           model: this.name,
-          prompt: prompt,
+          messages: messages,
           stream: true,
         }),
       });
@@ -67,9 +56,9 @@ export class Model {
           try {
             const json = JSON.parse(line);
             console.log('JSON recibido:', json);
-            if (json.response) {
-              console.log('Enviando chunk:', json.response);
-              yield json.response;
+            if (json.message?.content) {
+              console.log('Enviando chunk:', json.message.content);
+              yield json.message.content;
             }
           } catch (err) {
             console.error('Error parseando JSON:', line, err);
@@ -93,5 +82,9 @@ export class Model {
       console.error('Error loading models:', error);
       return [];
     }
+  }
+
+  getName(): string {
+    return this.name;
   }
 }

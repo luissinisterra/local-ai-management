@@ -8,7 +8,7 @@ export default function init(shadow: ShadowRoot | null) {
 
   // Crear servicio de chat y sesión
   const chatService = new ChatService();
-  chatService.createSession("gemma2:2b");
+  chatService.createSession("gemma3:270m");
 
   async function handleSendMessage() {
     const inputValue: string = textarea.value.trim();
