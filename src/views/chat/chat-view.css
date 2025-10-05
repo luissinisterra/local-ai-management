@@ -1,3 +1,45 @@
+/* Estilos mejorados para el selector de modelo */
+.model-select-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  background: #1e293b; /* palette base */
+  border-radius: 0.75em;
+  padding: 0.6rem 1rem;
+  box-shadow: 0 2px 12px 0 rgba(2,6,23,0.25);
+  border: 1px solid #334155;
+}
+
+#model-select {
+  padding: 0.5em 1.5em 0.5em 1em;
+  border-radius: 0.6em;
+  border: 1.5px solid #334155;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 1.08em;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(30,41,59,0.08);
+  font-family: inherit;
+}
+
+#model-select:focus {
+  border: 1.5px solid #38bdf8; /* azul claro usado en el proyecto */
+  box-shadow: 0 0 0 3px rgba(56,189,248,0.12);
+}
+
+#model-select option {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+.model-select-area label {
+  color: #94a3b8; /* texto secundario usado en sidebar */
+  font-weight: 600;
+  font-size: 1.05em;
+  letter-spacing: 0.01em;
+}
 /* Reset y definición de modo oscuro SUAVE */
 * {
   margin: 0;

@@ -1,8 +1,19 @@
-// Sesión de chat simple
-export class ChatSession {
-    constructor(model) {
+import { Conversation } from './Conversation.js';
+// Sesión de chat que hereda de Conversation y asocia un usuario
+export class ChatSession extends Conversation {
+    // Cambiar el modelo activo de la sesión
+    setModel(newModel, updateUserDefault = false) {
+        this.model = newModel;
+        if (updateUserDefault) {
+            this.user.setDefaultModel(newModel.name);
+        }
+    }
+    constructor(model, user) {
+        // Inicializa Conversation con valores vacíos
+        super('', '', model.name);
         this.messages = [];
         this.model = model;
+        this.user = user;
     }
     // Enviar mensaje con streaming
     async *streamMessage(userMessage) {
@@ -22,9 +33,23 @@ export class ChatSession {
             role: 'assistant',
             content: aiResponse
         });
+        // Actualiza Conversation con los últimos mensajes
+        this.userMessage = userMessage;
+        this.aiResponse = aiResponse;
+        this.modelUsed = this.model.name;
+        this.timestamp = new Date();
     }
     // Limpiar mensajes
     clearMessages() {
         this.messages = [];
+    }
+    // Obtener información de la sesión
+    getSessionInfo() {
+        return {
+            user: this.user.getInfo(),
+            model: this.model.name,
+            messages: this.messages,
+            lastConversation: this.getInfo()
+        };
     }
 }

@@ -1,13 +1,14 @@
-import { Model, ChatSession } from '../models/index.js';
+import { Model, ChatSession, User } from '../models/index.js';
 
 // Servicio de chat simple
 export class ChatService {
   currentSession: ChatSession | null = null;
 
   // Crear nueva sesión de chat
-  createSession(modelName: string): ChatSession {
-    const model = new Model(modelName);
-    this.currentSession = new ChatSession(model);
+  createSession(user: User, modelName?: string): ChatSession {
+    const modelToUse = modelName || user.defaultModel;
+    const model = new Model(modelToUse);
+    this.currentSession = new ChatSession(model, user);
     return this.currentSession;
   }
 

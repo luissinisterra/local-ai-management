@@ -1,13 +1,27 @@
+// ...existing code...
 import type { Message } from './interfaces/message.js';
 import { Model } from './Model.js';
+import { User } from './User.js';
+import { Conversation } from './Conversation.js';
 
-// Sesión de chat simple
-export class ChatSession {
+// Sesión de chat que hereda de Conversation y asocia un usuario
+export class ChatSession extends Conversation {
+  // Cambiar el modelo activo de la sesión
+  setModel(newModel: Model, updateUserDefault = false): void {
+    this.model = newModel;
+    if (updateUserDefault) {
+      this.user.setDefaultModel(newModel.name);
+    }
+  }
   messages: Message[] = [];
   model: Model;
+  user: User;
 
-  constructor(model: Model) {
+  constructor(model: Model, user: User) {
+    // Inicializa Conversation con valores vacíos
+    super('', '', model.name);
     this.model = model;
+    this.user = user;
   }
 
   // Enviar mensaje con streaming
@@ -19,7 +33,7 @@ export class ChatSession {
     });
 
     let aiResponse = '';
-    
+
     // Stream de respuesta del modelo (solo pasamos messages)
     for await (const chunk of this.model.streamMessage(this.messages)) {
       aiResponse += chunk;
@@ -31,10 +45,26 @@ export class ChatSession {
       role: 'assistant',
       content: aiResponse
     });
+
+    // Actualiza Conversation con los últimos mensajes
+    this.userMessage = userMessage;
+    this.aiResponse = aiResponse;
+    this.modelUsed = this.model.name;
+    this.timestamp = new Date();
   }
 
   // Limpiar mensajes
   clearMessages(): void {
     this.messages = [];
+  }
+
+  // Obtener información de la sesión
+  getSessionInfo() {
+    return {
+      user: this.user.getInfo(),
+      model: this.model.name,
+      messages: this.messages,
+      lastConversation: this.getInfo()
+    };
   }
 }

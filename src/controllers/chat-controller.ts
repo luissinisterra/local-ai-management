@@ -1,14 +1,58 @@
 import { ChatService } from "../services/chat-service.js";
+import { User } from "../models/User.js";
+import { ModelService } from "../services/model-service.js";
 
 export default function init(shadow: ShadowRoot | null) {
   if (!shadow) return;
+  
   const textarea = shadow.getElementById("user-input") as HTMLTextAreaElement;
   const sendButton = shadow.getElementById("user-button") as HTMLElement;
   const chatMessages = shadow.getElementById("chat-messages") as HTMLElement;
+  const modelSelect = shadow.getElementById("model-select") as HTMLSelectElement;
 
-  // Crear servicio de chat y sesión
+  // Crear usuario (puedes personalizar estos datos)
+  const user = new User("usuario_demo", "demo@email.com");
+
+  // Crear servicio de chat
   const chatService = new ChatService();
-  chatService.createSession("gemma3:4b");
+
+  // Llenar el selector de modelos dinámicamente usando ModelService
+  const modelService = new ModelService();
+  async function populateModelSelect() {
+    const models = await modelService.getModels();
+    modelSelect.innerHTML = "";
+    if (models.length === 0) {
+      const opt = document.createElement("option");
+      opt.value = "";
+      opt.textContent = "No hay modelos disponibles";
+      modelSelect.appendChild(opt);
+      modelSelect.disabled = true;
+      return;
+    }
+    models.forEach((model) => {
+      const opt = document.createElement("option");
+      opt.value = model.name;
+      opt.textContent = model.name;
+      modelSelect.appendChild(opt);
+    });
+    modelSelect.disabled = false;
+  }
+
+  // Iniciar sesión de chat con el modelo seleccionado
+  function startSession() {
+    const selectedModel = modelSelect.value || user.defaultModel;
+    chatService.createSession(user, selectedModel);
+  }
+
+  // Inicializar selector y sesión al cargar
+  populateModelSelect().then(() => {
+    startSession();
+  });
+
+  // Permitir cambiar de modelo y reiniciar la sesión
+  modelSelect.addEventListener("change", () => {
+    startSession();
+  });
 
   async function handleSendMessage() {
     const inputValue: string = textarea.value.trim();

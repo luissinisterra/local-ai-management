@@ -5,9 +5,10 @@ export class ChatService {
         this.currentSession = null;
     }
     // Crear nueva sesión de chat
-    createSession(modelName) {
-        const model = new Model(modelName);
-        this.currentSession = new ChatSession(model);
+    createSession(user, modelName) {
+        const modelToUse = modelName || user.defaultModel;
+        const model = new Model(modelToUse);
+        this.currentSession = new ChatSession(model, user);
         return this.currentSession;
     }
     // Enviar mensaje con streaming
