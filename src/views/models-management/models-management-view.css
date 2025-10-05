@@ -116,3 +116,71 @@ main {
   font-size: 1.05em;
   box-shadow: 0 1px 4px 0 rgba(30,41,59,0.06);
 }
+
+.project-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: linear-gradient(180deg, rgba(15,23,36,0.6), rgba(30,41,59,0.6));
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 1rem;
+  border-radius: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+
+.project-info h3 {
+  color: #e6eef8;
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+.project-meta {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.project-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.02);
+  color: #cbd5e1;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.status-badge .status-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #94a3b8;
+}
+.status-personal .status-dot { background: #64748b; }
+.status-inactive .status-dot { background: #9ca3af; }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.4rem;
+}
+.pagination-info { color: #94a3b8; }
+.pagination-controls { display:flex; gap:0.6rem; align-items:center; }
+.page-number { background: transparent; border: 1px solid #334155; color:#cbd5e1; padding:0.35rem 0.6rem; border-radius:0.45rem; }
+.page-number.active { background:#38bdf8; color:#071126; border:none; }
+.page-size-select { background:#0f1724; color:#f8fafc; border:1px solid #334155; padding:0.4rem; border-radius:0.45rem; }
+
+/* Ajustes responsivos */
+@media (max-width: 900px) {
+  .models-actions { flex-direction: column; align-items: stretch; }
+  .install-section, .models-section { max-width: 100%; }
+}
