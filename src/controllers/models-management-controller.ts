@@ -36,13 +36,13 @@ export default function init(shadow: ShadowRoot | null) {
             modelsList.appendChild(modelItem);
           });
         } else {
-          modelsList.innerHTML = '<p>No models installed</p>';
+          modelsList.innerHTML = '<p>No hay modelos instalados</p>';
         }
       }
     } catch (error) {
       console.error('Error loading models:', error);
       if (modelsList) {
-        modelsList.innerHTML = '<p>Error loading models. Make sure Ollama is running.</p>';
+        modelsList.innerHTML = '<p>Error al cargar los modelos</p>';
       }
     }
   }

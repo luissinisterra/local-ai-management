@@ -18,6 +18,7 @@ export default function init(shadow: ShadowRoot | null) {
 
   // Llenar el selector de modelos dinámicamente usando ModelService
   const modelService = new ModelService();
+  
   async function populateModelSelect() {
     const models = await modelService.getModels();
     modelSelect.innerHTML = "";

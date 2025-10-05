@@ -256,3 +256,196 @@ main {
   border-radius: 15px 15px 15px 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
+/* ===== ÁREA DE ERRORES ===== */
+.error-container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin: 0 24px 16px;
+  animation: slideDown 0.3s ease-out;
+}
+
+.error-container.hidden {
+  display: none;
+}
+
+.error-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  max-width: 720px;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.error-content.warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.error-content.info {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.error-icon {
+  flex-shrink: 0;
+  color: #ffffff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.error-message {
+  flex: 1;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.error-close {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-weight: bold;
+}
+
+.error-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== INDICADOR DE CARGA (TYPING) ===== */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--color-ai);
+  border-radius: 15px 15px 15px 0;
+  max-width: 70px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.typing-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+/* ===== ESTADO DESHABILITADO ===== */
+#user-input:disabled,
+#user-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#user-button:disabled:hover {
+  background: var(--color-button);
+  transform: none;
+}
+
+/* ===== MENSAJE DE NO HAY MODELOS ===== */
+.no-models-message {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--color-muted);
+}
+
+.no-models-message h3 {
+  color: var(--color-text);
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+.no-models-message p {
+  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.no-models-message code {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #0a84ff;
+}
+
+/* ===== MEJORAS RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .error-container {
+    margin: 0 16px 12px;
+  }
+
+  .error-content {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .error-message {
+    font-size: 13px;
+  }
+
+  .error-close {
+    width: 26px;
+    height: 26px;
+    font-size: 18px;
+  }
+}
