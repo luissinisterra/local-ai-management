@@ -2,6 +2,9 @@ import { ModelService } from "../services/model-service.js";
 
 export default function init(shadow: ShadowRoot | null) {
   if (!shadow) return;
+
+  console.log("ShadowRoot en init:", shadow);
+  console.log("modelsList:", shadow.getElementById("models-list"));
   
   // Obtener elementos del DOM
   const modelsList = shadow.getElementById("models-list") as HTMLElement;
@@ -30,7 +33,9 @@ export default function init(shadow: ShadowRoot | null) {
                 <p>Size: ${(model.size / 1024 / 1024 / 1024).toFixed(2)} GB</p>
               </div>
               <div class="model-actions">
-                <button class="btn btn-danger" onclick="deleteModel('${model.name}')">Delete</button>
+                <button class="btn btn-danger" onclick="deleteModel('${model.name}')">
+                  Eliminar
+                </button>
               </div>
             `;
             modelsList.appendChild(modelItem);

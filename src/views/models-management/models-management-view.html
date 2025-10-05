@@ -1,29 +1,55 @@
-<main>
+<main class="models-container">
+  <!-- Header -->
   <div class="models-header">
-    <h1>Modelos de IA</h1>
-    <p>Gestiona los modelos de IA instalados en tu sistema</p>
+    <div class="header-content">
+      <div class="header-icon">
+        <i class="fa-solid fa-cube"></i>
+      </div>
+      <div>
+        <h1>Gestión de Modelos IA</h1>
+        <p>Administra e instala modelos de lenguaje para Ollama</p>
+      </div>
+    </div>
+    <button id="refresh-models" class="refresh-btn">
+      Actualizar
+    </button>
   </div>
 
-  <div class="models-actions">
-    <div class="install-section">
-      <h2>Instalar Nuevo Modelo</h2>
-      <div class="input-group">
+  <!-- Install Section -->
+  <div class="install-card">
+    <div class="card-header">
+      <div class="card-title">
+        <h2>Instalar Nuevo Modelo</h2>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="install-form">
         <input 
           type="text" 
           id="model-name" 
-          placeholder="Nombre del modelo (ej: llama2, gemma2:2b)"
+          placeholder="Nombre del modelo (ej: llama2, gemma2:2b, mistral)"
           class="model-input"
         />
-        <button id="install-model" class="btn btn-primary">Instalar</button>
+        <button id="install-model" class="btn btn-primary">
+          Instalar
+        </button>
+      </div>
+      <p class="install-hint">
+        Explora modelos disponibles en <a href="https://ollama.ai/library" target="_blank">ollama.ai/library</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Models List -->
+  <div class="models-list-card">
+    <div class="card-header">
+      <div class="card-title">
+        <h2>Modelos Instalados</h2>
       </div>
     </div>
-
-    <div class="models-section">
-      <div class="section-header">
-        <h2>Modelos Instalados</h2>
-        <button id="refresh-models" class="btn btn-secondary">Actualizar</button>
-      </div>
-      <div id="models-list" class="models-list">
+    <div id="models-list" class="models-list">
+      <div class="loading-state">
+        <div class="spinner"></div>
         <p>Cargando modelos...</p>
       </div>
     </div>

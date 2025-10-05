@@ -2,6 +2,8 @@ import { ModelService } from "../services/model-service.js";
 export default function init(shadow) {
     if (!shadow)
         return;
+    console.log("ShadowRoot en init:", shadow);
+    console.log("modelsList:", shadow.getElementById("models-list"));
     // Obtener elementos del DOM
     const modelsList = shadow.getElementById("models-list");
     const refreshButton = shadow.getElementById("refresh-models");
@@ -25,21 +27,23 @@ export default function init(shadow) {
                 <p>Size: ${(model.size / 1024 / 1024 / 1024).toFixed(2)} GB</p>
               </div>
               <div class="model-actions">
-                <button class="btn btn-danger" onclick="deleteModel('${model.name}')">Delete</button>
+                <button class="btn btn-danger" onclick="deleteModel('${model.name}')">
+                  Eliminar
+                </button>
               </div>
             `;
                         modelsList.appendChild(modelItem);
                     });
                 }
                 else {
-                    modelsList.innerHTML = '<p>No models installed</p>';
+                    modelsList.innerHTML = '<p>No hay modelos instalados</p>';
                 }
             }
         }
         catch (error) {
             console.error('Error loading models:', error);
             if (modelsList) {
-                modelsList.innerHTML = '<p>Error loading models. Make sure Ollama is running.</p>';
+                modelsList.innerHTML = '<p>Error al cargar los modelos</p>';
             }
         }
     }
