@@ -5,7 +5,7 @@ export default function init(shadow: ShadowRoot | null) {
 
   console.log("ShadowRoot en init:", shadow);
   console.log("modelsList:", shadow.getElementById("models-list"));
-  
+
   // Obtener elementos del DOM
   const modelsList = shadow.getElementById("models-list") as HTMLElement;
   const refreshButton = shadow.getElementById("refresh-models") as HTMLElement;
@@ -19,14 +19,14 @@ export default function init(shadow: ShadowRoot | null) {
   async function loadModels() {
     try {
       const models = await modelService.getModels();
-      
+
       if (modelsList) {
-        modelsList.innerHTML = '';
-        
+        modelsList.innerHTML = "";
+
         if (models.length > 0) {
           models.forEach((model) => {
-            const modelItem = document.createElement('div');
-            modelItem.className = 'model-item';
+            const modelItem = document.createElement("div");
+            modelItem.className = "model-item";
             modelItem.innerHTML = `
               <div class="model-info">
                 <h3>${model.name}</h3>
@@ -41,13 +41,13 @@ export default function init(shadow: ShadowRoot | null) {
             modelsList.appendChild(modelItem);
           });
         } else {
-          modelsList.innerHTML = '<p>No hay modelos instalados</p>';
+          modelsList.innerHTML = "<p>No hay modelos instalados</p>";
         }
       }
     } catch (error) {
-      console.error('Error loading models:', error);
+      console.error("Error loading models:", error);
       if (modelsList) {
-        modelsList.innerHTML = '<p>Error al cargar los modelos</p>';
+        modelsList.innerHTML = "<p>Error al cargar los modelos</p>";
       }
     }
   }
@@ -56,56 +56,56 @@ export default function init(shadow: ShadowRoot | null) {
   async function installModel() {
     const modelName = modelInput?.value.trim();
     if (!modelName) {
-      alert('Please enter a model name');
+      alert("Ingresa algun modelo");
       return;
     }
 
     try {
       const success = await modelService.installModel(modelName);
       if (success) {
-        alert('Model installation started. Check the console for progress.');
+        alert("Instalando " + modelName);
         loadModels(); // Recargar la lista
       } else {
-        alert('Error installing model');
+        alert("Error instalando modelo");
       }
     } catch (error) {
-      console.error('Error installing model:', error);
-      alert('Error installing model');
+      console.error("Error instalando modelo", error);
+      alert("Error instalando modelo");
     }
   }
 
   // Función para eliminar un modelo
   async function deleteModel(modelName: string) {
-    if (!confirm(`Are you sure you want to delete ${modelName}?`)) {
+    if (!confirm(`Deseas eliminar ${modelName}?`)) {
       return;
     }
 
     try {
       const success = await modelService.deleteModel(modelName);
       if (success) {
-        alert('Model deleted successfully');
+        alert("Modelo eliminado exitosamente");
         loadModels(); // Recargar la lista
       } else {
-        alert('Error deleting model');
+        alert("Error deleting model");
       }
     } catch (error) {
-      console.error('Error deleting model:', error);
-      alert('Error deleting model');
+      console.error("Error deleting model:", error);
+      alert("Error deleting model");
     }
   }
 
   // Event listeners
   if (refreshButton) {
-    refreshButton.addEventListener('click', loadModels);
+    refreshButton.addEventListener("click", loadModels);
   }
 
   if (installButton) {
-    installButton.addEventListener('click', installModel);
+    installButton.addEventListener("click", installModel);
   }
 
   if (modelInput) {
-    modelInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
+    modelInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
         installModel();
       }
     });
