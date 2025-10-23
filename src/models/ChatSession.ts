@@ -1,8 +1,8 @@
 // ...existing code...
-import type { Message } from './interfaces/message.js';
-import { Model } from './Model.js';
-import { User } from './User.js';
-import { Conversation } from './Conversation.js';
+import type { Message } from "./interfaces/message.js";
+import { Model } from "./Model.js";
+import { User } from "./User.js";
+import { Conversation } from "./Conversation.js";
 
 // Sesión de chat que hereda de Conversation y asocia un usuario
 export class ChatSession extends Conversation {
@@ -16,34 +16,39 @@ export class ChatSession extends Conversation {
   messages: Message[] = [];
   model: Model;
   user: User;
+  toolsJson: Object[];
 
-  constructor(model: Model, user: User) {
+  constructor(model: Model, user: User, toolsJson: Object[]) {
     // Inicializa Conversation con valores vacíos
-    super('', '', model.name);
+    super("", "", model.name);
     this.model = model;
     this.user = user;
+    this.toolsJson = toolsJson;
   }
 
   // Enviar mensaje con streaming
-  async* streamMessage(userMessage: string): AsyncGenerator<string> {
+  async *streamMessage(userMessage: string): AsyncGenerator<string> {
     // Agregar mensaje del usuario
     this.messages.push({
-      role: 'user',
-      content: userMessage
+      role: "user",
+      content: userMessage,
     });
 
-    let aiResponse = '';
+    let aiResponse = "";
 
     // Stream de respuesta del modelo (solo pasamos messages)
-    for await (const chunk of this.model.streamMessage(this.messages)) {
+    for await (const chunk of this.model.streamMessage(
+      this.messages,
+      this.toolsJson,
+    )) {
       aiResponse += chunk;
       yield chunk;
     }
 
     // Agregar respuesta completa de la IA
     this.messages.push({
-      role: 'assistant',
-      content: aiResponse
+      role: "assistant",
+      content: aiResponse,
     });
 
     // Actualiza Conversation con los últimos mensajes
@@ -64,7 +69,8 @@ export class ChatSession extends Conversation {
       user: this.user.getInfo(),
       model: this.model.name,
       messages: this.messages,
-      lastConversation: this.getInfo()
+      lastConversation: this.getInfo(),
+      tools: this.toolsJson,
     };
   }
 }
