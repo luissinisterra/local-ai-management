@@ -4,11 +4,13 @@ import { ModelService } from "../services/model-service.js";
 
 export default function init(shadow: ShadowRoot | null) {
   if (!shadow) return;
-  
+
   const textarea = shadow.getElementById("user-input") as HTMLTextAreaElement;
   const sendButton = shadow.getElementById("user-button") as HTMLElement;
   const chatMessages = shadow.getElementById("chat-messages") as HTMLElement;
-  const modelSelect = shadow.getElementById("model-select") as HTMLSelectElement;
+  const modelSelect = shadow.getElementById(
+    "model-select"
+  ) as HTMLSelectElement;
 
   // Crear usuario (puedes personalizar estos datos)
   const user = new User("usuario_demo", "demo@email.com");
@@ -18,7 +20,7 @@ export default function init(shadow: ShadowRoot | null) {
 
   // Llenar el selector de modelos dinámicamente usando ModelService
   const modelService = new ModelService();
-  
+
   async function populateModelSelect() {
     const models = await modelService.getModels();
     modelSelect.innerHTML = "";
@@ -84,7 +86,7 @@ export default function init(shadow: ShadowRoot | null) {
         currentAiMessage = addMessageToDOM(
           "Error al enviar mensaje: " + errorMessage,
           "ai",
-          chatMessages,
+          chatMessages
         );
       }
     }
@@ -102,7 +104,7 @@ export default function init(shadow: ShadowRoot | null) {
   function addMessageToDOM(
     content: string,
     sentBy: string,
-    parent: HTMLElement,
+    parent: HTMLElement
   ): HTMLElement {
     const newMessageContainer = document.createElement("div");
     const newMessage = document.createElement("p");

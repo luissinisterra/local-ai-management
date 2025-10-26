@@ -1,3 +1,4 @@
+import { runModelWithWeatherTool } from "../services/tool-service.js";
 // Modelo simple para representar un modelo de IA
 export class Model {
     constructor(name, size = 0) {
@@ -51,7 +52,9 @@ export class Model {
                             yield json.message.content;
                         }
                         else if (json.message.tool_calls) {
-                            alert(JSON.stringify(json.message.tool_calls[0].function.arguments.city));
+                            //Aca se hace todo lo que se necesite de tools
+                            const city = json.message.tool_calls[0].function.arguments.city;
+                            runModelWithWeatherTool(this.name, messages, city);
                         }
                     }
                     catch (err) {

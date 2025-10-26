@@ -39,7 +39,7 @@ export class ChatSession extends Conversation {
     // Stream de respuesta del modelo (solo pasamos messages)
     for await (const chunk of this.model.streamMessage(
       this.messages,
-      this.toolsJson,
+      this.toolsJson
     )) {
       aiResponse += chunk;
       yield chunk;
