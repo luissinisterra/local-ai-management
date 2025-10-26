@@ -1,4 +1,5 @@
 import type { Message } from "./interfaces/message.js";
+import { runModelWithWeatherTool } from "../services/tool-service.js";
 
 // Modelo simple para representar un modelo de IA
 export class Model {
@@ -13,7 +14,7 @@ export class Model {
   // Enviar mensaje con streaming
   async *streamMessage(
     messages: Message[],
-    toolsJson: Object[],
+    toolsJson: Object[]
   ): AsyncGenerator<string> {
     console.log("Modelo enviando mensaje a Ollama:", this.name);
     const url = "http://localhost:11434/api/chat";
@@ -36,7 +37,7 @@ export class Model {
 
       if (!response.ok) {
         throw new Error(
-          `Error de Ollama: ${response.status} ${response.statusText}`,
+          `Error de Ollama: ${response.status} ${response.statusText}`
         );
       }
 
@@ -68,12 +69,8 @@ export class Model {
               yield json.message.content;
             } else if (json.message.tool_calls) {
               //Aca se hace todo lo que se necesite de tools
-              return "";
-              alert(
-                JSON.stringify(
-                  json.message.tool_calls[0].function.arguments.city,
-                ),
-              );
+              const city = json.message.tool_calls[0].function.arguments.city
+              runModelWithWeatherTool(this.name, messages, city);
             }
           } catch (err) {
             console.error("Error parseando JSON:", line, err);

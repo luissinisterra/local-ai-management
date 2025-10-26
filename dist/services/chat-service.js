@@ -9,7 +9,7 @@ export class ChatService {
     createSession(user, modelName) {
         const modelToUse = modelName || user.defaultModel;
         const model = new Model(modelToUse);
-        this.currentSession = new ChatSession(model, user, [getWeatherTool()]);
+        this.currentSession = new ChatSession(model, user, getWeatherTool());
         return this.currentSession;
     }
     // Enviar mensaje con streaming
@@ -17,8 +17,6 @@ export class ChatService {
         if (!this.currentSession) {
             throw new Error("No hay sesión activa");
         }
-        console.log("-------------------------------------_>" +
-            JSON.stringify(this.currentSession.getSessionInfo()));
         for await (const chunk of this.currentSession.streamMessage(message)) {
             yield chunk;
         }
