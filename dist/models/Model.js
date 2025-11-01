@@ -1,4 +1,4 @@
-import { runModelWithWeatherTool } from "../services/tool-service.js";
+import { get_current_weather } from "../services/tool-service.js";
 // Modelo simple para representar un modelo de IA
 export class Model {
     constructor(name, size = 0) {
@@ -53,8 +53,19 @@ export class Model {
                         }
                         else if (json.message.tool_calls) {
                             //Aca se hace todo lo que se necesite de tools
+                            messages.push(json.message);
                             const city = json.message.tool_calls[0].function.arguments.city;
-                            runModelWithWeatherTool(this.name, messages, city);
+                            const toolResponse = await get_current_weather(city);
+                            messages.push({
+                                role: "tool",
+                                tool_name: "get_current_weather",
+                                content: JSON.stringify(toolResponse),
+                            });
+                            console.log("ANTES DE ENTRAR");
+                            for await (const chunk of this.streamMessage(messages, [])) {
+                                yield chunk;
+                            }
+                            console.log("DESPUES DE ENTRAR");
                         }
                     }
                     catch (err) {
