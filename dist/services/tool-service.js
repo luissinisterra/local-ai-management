@@ -1,23 +1,29 @@
-export function getWeatherTool() {
-    return [
-        {
-            type: "function",
-            function: {
-                name: "get_current_weather",
-                description: "Get the current weather for a city",
-                parameters: {
-                    type: "object",
-                    properties: {
-                        city: {
-                            type: "string",
-                            description: "The name of the city",
-                        },
+export function getActiveTools() {
+    var _a;
+    let activeTools = [];
+    if (JSON.parse((_a = localStorage.getItem("isWeatherToolActive")) !== null && _a !== void 0 ? _a : "false")) {
+        activeTools.push(getWeatherTool());
+    }
+    return activeTools;
+}
+function getWeatherTool() {
+    return {
+        type: "function",
+        function: {
+            name: "get_current_weather",
+            description: "Get the current weather for a city",
+            parameters: {
+                type: "object",
+                properties: {
+                    city: {
+                        type: "string",
+                        description: "The name of the city",
                     },
-                    required: ["city"],
                 },
+                required: ["city"],
             },
         },
-    ];
+    };
 }
 //Podría llamar a una API
 export async function get_current_weather(city) {

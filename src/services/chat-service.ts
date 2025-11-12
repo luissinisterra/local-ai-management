@@ -1,5 +1,5 @@
 import { Model, ChatSession, User } from "../models/index.js";
-import { getWeatherTool } from "./tool-service.js";
+import { getActiveTools } from "./tool-service.js";
 
 // Servicio de chat simple
 export class ChatService {
@@ -9,7 +9,7 @@ export class ChatService {
   createSession(user: User, modelName?: string): ChatSession {
     const modelToUse = modelName || user.defaultModel;
     const model = new Model(modelToUse);
-    this.currentSession = new ChatSession(model, user, getWeatherTool());
+    this.currentSession = new ChatSession(model, user, getActiveTools());
     return this.currentSession;
   }
 
@@ -18,6 +18,7 @@ export class ChatService {
     if (!this.currentSession) {
       throw new Error("No hay sesión activa");
     }
+    this.currentSession.setTools(getActiveTools());
     for await (const chunk of this.currentSession.streamMessage(message)) {
       yield chunk;
     }

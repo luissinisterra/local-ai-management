@@ -13,6 +13,12 @@ export class ChatSession extends Conversation {
       this.user.setDefaultModel(newModel.name);
     }
   }
+
+  setTools(tools: Object[]) {
+    this.toolsJson = tools;
+  }
+
+  history: string | null = null;
   messages: Message[] = [];
   model: Model;
   user: User;
@@ -24,6 +30,14 @@ export class ChatSession extends Conversation {
     this.model = model;
     this.user = user;
     this.toolsJson = toolsJson;
+    this.history = localStorage.getItem("history");
+
+    if (this.history) {
+      this.messages = history ? JSON.parse(history ? this.history : "") : [];
+    }
+    if (localStorage.getItem("messages")) {
+      this.messages = JSON.parse(localStorage.getItem("messages") ?? "");
+    }
   }
 
   // Enviar mensaje con streaming
@@ -39,7 +53,7 @@ export class ChatSession extends Conversation {
     // Stream de respuesta del modelo (solo pasamos messages)
     for await (const chunk of this.model.streamMessage(
       this.messages,
-      this.toolsJson
+      this.toolsJson,
     )) {
       aiResponse += chunk;
       yield chunk;
@@ -47,10 +61,11 @@ export class ChatSession extends Conversation {
 
     // Agregar respuesta completa de la IA
     this.messages.push({
-      role: "assistant",
+      role: "ai",
       content: aiResponse,
     });
 
+    localStorage.setItem("messages", JSON.stringify(this.messages));
     // Actualiza Conversation con los últimos mensajes
     this.userMessage = userMessage;
     this.aiResponse = aiResponse;
@@ -61,6 +76,7 @@ export class ChatSession extends Conversation {
   // Limpiar mensajes
   clearMessages(): void {
     this.messages = [];
+    localStorage.setItem("messages", "[]");
   }
 
   // Obtener información de la sesión

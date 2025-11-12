@@ -1,5 +1,7 @@
 import loadPage from "../services/router-service.js";
 
+localStorage.clear();
+
 const pageContainer = document.getElementById(
   "page-container",
 ) as HTMLElement | null;
