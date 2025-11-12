@@ -1,25 +1,30 @@
-import type { Message } from "../models/interfaces/message.js";
+export function getActiveTools(): Object[] {
+  let activeTools = [];
 
-export function getWeatherTool(): Object[] {
-  return [
-    {
-      type: "function",
-      function: {
-        name: "get_current_weather",
-        description: "Get the current weather for a city",
-        parameters: {
-          type: "object",
-          properties: {
-            city: {
-              type: "string",
-              description: "The name of the city",
-            },
+  if (JSON.parse(localStorage.getItem("isWeatherToolActive") ?? "false")) {
+    activeTools.push(getWeatherTool());
+  }
+  return activeTools;
+}
+
+function getWeatherTool(): Object {
+  return {
+    type: "function",
+    function: {
+      name: "get_current_weather",
+      description: "Get the current weather for a city",
+      parameters: {
+        type: "object",
+        properties: {
+          city: {
+            type: "string",
+            description: "The name of the city",
           },
-          required: ["city"],
         },
+        required: ["city"],
       },
     },
-  ];
+  };
 }
 
 //Podría llamar a una API

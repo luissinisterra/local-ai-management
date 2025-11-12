@@ -9,6 +9,7 @@
 
 /* ===== HEADER DEL CHAT ===== */
 .chat-header {
+  position: relative;
   background: #1e293b;
   border-bottom: 1px solid #334155;
   padding: 1rem 1.5rem;
@@ -198,6 +199,7 @@ main {
   margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
   background: #0f172a;
   border-radius: 1.25rem;
@@ -536,4 +538,235 @@ main {
     height: 26px;
     font-size: 18px;
   }
+}
+
+.toolButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: calc(50% + 85px);
+  transform: translateX(50%);
+  width: 170px;
+  height: 50px;
+  background: #2d3748; /* gris azulado medio, resalta sin brillar */
+  color: #f1f5f9; /* texto claro */
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid #475569; /* borde con contraste suave */
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.toolButton::before {
+  content: "⚙️";
+  margin-right: 8px;
+  font-size: 17px;
+  opacity: 0.9;
+}
+
+.toolButton:hover {
+  background: #3b465a; /* un tono más claro en hover */
+  border-color: #64748b;
+  color: #ffffff;
+  transform: translateX(50%) scale(1.03);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.toolButton:active {
+  transform: translateX(50%) scale(0.98);
+  background: #2c3a4d;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* --- CONTENEDOR DEL MODAL --- */
+.toolModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.toolModal.active {
+  display: flex;
+}
+
+/* --- CUERPO DEL MODAL --- */
+.toolModal > div {
+  background: #141922;
+  border: 1.5px solid #4ef0c8;
+  border-radius: 12px;
+  box-shadow:
+    0 0 10px #4ef0c850,
+    inset 0 0 8px #4ef0c830;
+  width: 420px;
+  max-width: 90%;
+  color: #d9faff;
+  font-family: "Poppins", sans-serif;
+  animation: popIn 0.3s ease;
+}
+
+/* --- ANIMACIÓN --- */
+@keyframes popIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- HEADER --- */
+.toolModal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #27303d;
+  padding: 16px 24px;
+}
+
+.toolModal-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #6efaff;
+  font-weight: 500;
+}
+
+.toolModal-close {
+  background: none;
+  border: none;
+  color: #6efaff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.toolModal-close:hover {
+  color: #b0fff7;
+  transform: scale(1.1);
+}
+
+/* --- CUERPO INTERNO --- */
+.toolModal-body {
+  padding: 20px 24px;
+}
+
+/* --- SWITCH CONTAINER --- */
+.switch-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.switch-label {
+  font-size: 1rem;
+  color: #c4ffff;
+}
+
+/* --- SWITCH --- */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2a2a2a;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #4ef0c8;
+  transition: 0.4s;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #4ef0c850;
+}
+
+input:checked + .slider {
+  background-color: #4ef0c820;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+  box-shadow: 0 0 8px #4ef0c880;
+}
+
+/* ===== BOTÓN DE LIMPIAR MENSAJES ===== */
+.clear-messages-button {
+  position: absolute;
+  background: #1e293b;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 0.75rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  margin-left: 100px;
+  margin-top: 10px;
+}
+
+/* Ícono opcional de escoba */
+.clear-messages-button::before {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Hover – efecto de enfoque con el azul IA */
+.clear-messages-button:hover {
+  background: #0f172a;
+  border-color: #38bdf8;
+  color: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Activo – clic */
+.clear-messages-button:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 4px rgba(56, 189, 248, 0.2);
+}
+
+/* Deshabilitado */
+.clear-messages-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }

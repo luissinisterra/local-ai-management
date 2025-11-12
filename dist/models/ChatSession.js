@@ -8,13 +8,25 @@ export class ChatSession extends Conversation {
             this.user.setDefaultModel(newModel.name);
         }
     }
+    setTools(tools) {
+        this.toolsJson = tools;
+    }
     constructor(model, user, toolsJson) {
+        var _a;
         // Inicializa Conversation con valores vacíos
         super("", "", model.name);
+        this.history = null;
         this.messages = [];
         this.model = model;
         this.user = user;
         this.toolsJson = toolsJson;
+        this.history = localStorage.getItem("history");
+        if (this.history) {
+            this.messages = history ? JSON.parse(history ? this.history : "") : [];
+        }
+        if (localStorage.getItem("messages")) {
+            this.messages = JSON.parse((_a = localStorage.getItem("messages")) !== null && _a !== void 0 ? _a : "");
+        }
     }
     // Enviar mensaje con streaming
     async *streamMessage(userMessage) {
@@ -31,9 +43,10 @@ export class ChatSession extends Conversation {
         }
         // Agregar respuesta completa de la IA
         this.messages.push({
-            role: "assistant",
+            role: "ai",
             content: aiResponse,
         });
+        localStorage.setItem("messages", JSON.stringify(this.messages));
         // Actualiza Conversation con los últimos mensajes
         this.userMessage = userMessage;
         this.aiResponse = aiResponse;
@@ -43,6 +56,7 @@ export class ChatSession extends Conversation {
     // Limpiar mensajes
     clearMessages() {
         this.messages = [];
+        localStorage.setItem("messages", "[]");
     }
     // Obtener información de la sesión
     getSessionInfo() {

@@ -36,6 +36,11 @@ export class Model {
       console.log("Respuesta de Ollama:", response.status, response.ok);
 
       if (!response.ok) {
+        if (response.status == 400) {
+          throw new Error(
+            `Este modelo no soporta tools, desactivelas por favor`,
+          );
+        }
         throw new Error(
           `Error de Ollama: ${response.status} ${response.statusText}`,
         );
