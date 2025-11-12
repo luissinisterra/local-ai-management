@@ -174,6 +174,11 @@ export default function init(shadow: ShadowRoot | null) {
     }
   }
 
+  //Cargar el estado del switch, al final para evitar conflictos de carga
+  switchClima.checked = JSON.parse(
+    localStorage.getItem("isWeatherToolActive") || "false",
+  );
+
   //Renderizar el historial persistente
   renderPersistencedHistory();
 }

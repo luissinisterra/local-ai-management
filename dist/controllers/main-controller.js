@@ -1,6 +1,6 @@
 var _a;
 import loadPage from "../services/router-service.js";
-localStorage.clear();
+//localStorage.clear();
 const pageContainer = document.getElementById("page-container");
 const toggleButtons = document.querySelectorAll(".toggle-btn");
 toggleButtons.forEach((btn) => {
