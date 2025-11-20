@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IA Manager - Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <button class="toggle-btn">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+      </svg>
+    </button>
+
+    <aside
+      class="sidebar"
+      id="sidebar"
+      style="display: flex; flex-direction: column"
+    >
+      <div class="sidebar-header">
+        <div class="logo">IA</div>
+        <div class="logo-text">IA Manager</div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <a href="/home" class="nav-item active">
+            <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+            <span class="nav-text">Inicio</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <a href="/models" class="nav-item">
+            <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <span class="nav-text">Modelos IA</span>
+          </a>
+          <a href="/chat" class="nav-item">
+            <svg
+              width="16px"
+              height="16px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M17 3.33782C15.5291 2.48697 13.8214 2 12 2C6.47715 2 2 6.47715 2 12C2 13.5997 2.37562 15.1116 3.04346 16.4525C3.22094 16.8088 3.28001 17.2161 3.17712 17.6006L2.58151 19.8267C2.32295 20.793 3.20701 21.677 4.17335 21.4185L6.39939 20.8229C6.78393 20.72 7.19121 20.7791 7.54753 20.9565C8.88837 21.6244 10.4003 22 12 22C17.5228 22 22 17.5228 22 12C22 10.1786 21.513 8.47087 20.6622 7"
+                  stroke="#94a3b8"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>
+              </g>
+            </svg>
+            <span class="nav-text">Chat</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar">LS</div>
+          <div class="user-info">
+            <div class="user-name">Luis Eduardo S...</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div id="page-container" class="main-content">
+      <home-view></home-view>
+    </div>
+
+    <script type="module" src="./dist/views/chat/chat-view.js"></script>
+    <script
+      type="module"
+      src="./dist/views/models-management/models-management-view.js"
+    ></script>
+    <script type="module" src="./dist/views/home/home-view.js"></script>
+    <script type="module" src="./dist/controllers/main-controller.js"></script>
+  </body>
+</html>

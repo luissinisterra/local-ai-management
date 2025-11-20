@@ -1,0 +1,69 @@
+<main class="chat-container">
+  <!-- Header del Chat -->
+  <div class="chat-header">
+    <button class="toolButton">Tools</button>
+
+    <div class="toolModal" id="toolModal">
+      <div>
+        <div class="toolModal-header">
+          <h2>IA Tools</h2>
+          <button class="toolModal-close">&times</button>
+        </div>
+        <div class="toolModal-body">
+          <div class="switch-container">
+            <span class="switch-label">Clima</span>
+            <label class="switch">
+              <input id="switchClima" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-header-info">
+      <div class="chat-avatar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <div class="chat-header-text">
+        <h2>Asistente IA</h2>
+        <p class="chat-status">En línea</p>
+      </div>
+    </div>
+    <div class="model-select-area">
+      <label for="model-select">Modelo:</label>
+      <select id="model-select"></select>
+    </div>
+  </div>
+
+  <!-- Área de Mensajes -->
+  <div id="chat-messages"></div>
+
+  <!-- Input Area -->
+  <div class="input-area">
+    <button class="clear-messages-button">🧹 Limpiar chat</button>
+    <div class="input-wrapper">
+      <textarea
+        id="user-input"
+        placeholder="Escribe tu mensaje..."
+        rows="1"
+      ></textarea>
+      <button id="user-button" type="button" aria-label="Enviar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</main>
